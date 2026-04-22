@@ -85,6 +85,12 @@ a:hover { color: var(--saffron-dark); }
   border-radius: 4px;
 }
 
+/* ── Paint performance: skip off-screen render until scroll ── */
+#about, #products, #wholesale, #gallery, #testimonials, #contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+
 /* ── Utility ──────────────────────────────────────────────── */
 .text-saffron    { color: var(--saffron) !important; }
 .text-yellow     { color: var(--yellow) !important; }

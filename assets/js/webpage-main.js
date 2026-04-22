@@ -17,6 +17,30 @@
     return d.innerHTML;
   }
 
+  /* ── Image Fallbacks (replaces inline onerror for stricter CSP) */
+  function makeFallbackSrc(img) {
+    var w = img.getAttribute('width') || 400;
+    var h = img.getAttribute('height') || 300;
+    var emoji = img.dataset.fallbackEmoji || '🍽️';
+    var rx = img.dataset.fallbackCircular === 'true' ? Math.round(Math.min(+w, +h) / 2) : 6;
+    return 'data:image/svg+xml,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '">' +
+      '<rect fill="#FF993322" width="' + w + '" height="' + h + '" rx="' + rx + '"/>' +
+      '<text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-size="' +
+        Math.round(Math.min(+w, +h) * 0.28) + '">' + emoji + '</text>' +
+      '</svg>'
+    );
+  }
+
+  function initImageFallbacks() {
+    qsa('img[data-fallback-emoji]').forEach(function (img) {
+      function applyFallback() { img.src = makeFallbackSrc(img); }
+      img.addEventListener('error', applyFallback, { once: true });
+      // Handle images that already failed before this deferred script ran
+      if (img.complete && img.naturalWidth === 0 && img.src) applyFallback();
+    });
+  }
+
   /* ── AOS (Animate on Scroll) ──────────────────────────────── */
   function runAOS() {
     AOS.init({
@@ -170,6 +194,9 @@
       });
     });
 
+    var lastSubmitTime = 0;
+    var RATE_LIMIT_MS = 30000;
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
@@ -178,6 +205,14 @@
       if (hp && hp.value.length > 0) {
         // Silently ignore – bot submission
         showMsg('Thank you! We will get back to you.', 'success');
+        return;
+      }
+
+      // Rate limit: block re-submission within 30 s
+      var now = Date.now();
+      if (now - lastSubmitTime < RATE_LIMIT_MS) {
+        var wait = Math.ceil((RATE_LIMIT_MS - (now - lastSubmitTime)) / 1000);
+        showMsg('Please wait ' + wait + ' seconds before submitting again.', 'error');
         return;
       }
 
@@ -234,6 +269,7 @@
 
       // Simulate async send (open WhatsApp)
       setTimeout(function () {
+        lastSubmitTime = Date.now();
         window.open('https://wa.me/919574659456?text=' + waText, '_blank', 'noopener,noreferrer');
 
         // Reset form
@@ -266,16 +302,16 @@
         var target = parseInt(el.textContent, 10);
         if (isNaN(target)) return;
         var suffix = el.textContent.replace(/[0-9]/g, '');
-        var start = 0;
-        var duration = 1500;
-        var timer = setInterval(function () {
-          start += Math.ceil(target / (duration / 16));
-          if (start >= target) {
-            start = target;
-            clearInterval(timer);
-          }
-          el.textContent = start + suffix;
-        }, 16);
+        var duration = 1400;
+        var startTime = null;
+        function tick(ts) {
+          if (!startTime) startTime = ts;
+          var progress = Math.min((ts - startTime) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3); // cubic ease-out
+          el.textContent = Math.round(eased * target) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
         observer.unobserve(el);
       });
     }, { threshold: 0.5 });
@@ -310,6 +346,7 @@
 
   /* ── Init all ─────────────────────────────────────────────── */
   function init() {
+    initImageFallbacks();
     initAOS();
     initNavbar();
     initBackToTop();

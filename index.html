@@ -26,8 +26,11 @@
   <meta name="twitter:title" content="Bhramani Khandavi House" />
   <meta name="twitter:description" content="Authentic Gujarati Farsan – Khandavi, Samosa, Khaman & more. Vadodara." />
 
-  <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data:; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com 'unsafe-inline'; style-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:; img-src 'self' data: https: blob:; connect-src 'self' https:; frame-src https://www.google.com;" />
+  <!-- Content Security Policy – unsafe-inline removed from script-src; onerror handled via JS -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data:; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:; img-src 'self' data: https: blob:; connect-src 'self' https:; frame-src https://www.google.com;" />
+  <!-- Additional Security Headers -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/farsan-favicon.svg" />
@@ -35,6 +38,8 @@
   <!-- Google Fonts: Poppins + Noto Sans Gujarati -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Bootstrap 5 CSS -->
@@ -188,18 +193,15 @@
       <div class="col-lg-5 d-none d-lg-flex justify-content-end" data-aos="fade-left" data-aos-duration="900" data-aos-delay="200">
         <div class="hero-image-wrap">
           <div class="hero-dish hero-dish-1">
-            <img src="assets/images/farsan/khandvi.png" alt="Fresh Khandavi" loading="eager" width="200" height="200"
-              onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect fill=%22%23FF993322%22 width=%22200%22 height=%22200%22 rx=%22100%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2240%22>🥗</text></svg>'" />
+            <img src="assets/images/farsan/khandvi.png" alt="Fresh Khandavi" loading="eager" fetchpriority="high" width="200" height="200" data-fallback-emoji="🥗" data-fallback-circular="true" />
             <span class="dish-label" data-en="Khandavi" data-gu="ખાંડવી">Khandavi</span>
           </div>
           <div class="hero-dish hero-dish-2">
-            <img src="assets/images/farsan/samosa.png" alt="Crispy Samosa" loading="eager" width="160" height="160"
-              onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><rect fill=%22%23FFC10722%22 width=%22160%22 height=%22160%22 rx=%2280%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2240%22>🥟</text></svg>'" />
+            <img src="assets/images/farsan/samosa.png" alt="Crispy Samosa" loading="eager" fetchpriority="high" width="160" height="160" data-fallback-emoji="🥟" data-fallback-circular="true" />
             <span class="dish-label" data-en="Samosa" data-gu="સામોસા">Samosa</span>
           </div>
           <div class="hero-dish hero-dish-3">
-            <img src="assets/images/farsan/khaman.png" alt="Soft Khaman" loading="eager" width="140" height="140"
-              onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22><rect fill=%22%23FF993322%22 width=%22140%22 height=%22140%22 rx=%2270%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2236%22>🍰</text></svg>'" />
+            <img src="assets/images/farsan/khaman.png" alt="Soft Khaman" loading="eager" fetchpriority="high" width="140" height="140" data-fallback-emoji="🍰" data-fallback-circular="true" />
             <span class="dish-label" data-en="Khaman" data-gu="ખમણ">Khaman</span>
           </div>
         </div>
@@ -220,8 +222,7 @@
           <div class="about-img-main">
             <picture>
               <source srcset="assets/images/shop.webp" type="image/webp">
-              <img src="assets/images/shop.png" alt="Bhramani Khandavi House shop front" loading="lazy" class="rounded-4 w-100"
-                onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23FF993311%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-size=%2260%22>🏪</text></svg>'" />
+              <img src="assets/images/shop.png" alt="Bhramani Khandavi House shop front" loading="lazy" decoding="async" width="400" height="300" class="rounded-4 w-100" data-fallback-emoji="🏪" />
             </picture>
           </div>
           <div class="about-img-badge">
@@ -317,8 +318,7 @@
         <div class="product-card featured-product">
           <div class="product-badge" data-en="⭐ Special" data-gu="⭐ વિશેષ">⭐ Special</div>
           <div class="product-img-wrap">
-            <img src="assets/images/farsan/khandvi.png" alt="Khandavi" loading="lazy" width="380" height="240"
-              onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22380%22 height=%22240%22><rect fill=%22%23FF993322%22 width=%22380%22 height=%22240%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2270%22>🥗</text></svg>'" />
+            <img src="assets/images/farsan/khandvi.png" alt="Khandavi" loading="lazy" decoding="async" width="380" height="240" data-fallback-emoji="🥗" />
           </div>
           <div class="product-body">
             <h3 class="product-name" data-en="Khandavi" data-gu="ખાંડવી">Khandavi</h3>
@@ -339,8 +339,7 @@
         <div class="product-card featured-product">
           <div class="product-badge" data-en="🔥 Popular" data-gu="🔥 લોકપ્રિય">🔥 Popular</div>
           <div class="product-img-wrap">
-            <img src="assets/images/farsan/samosa.png" alt="Crispy Samosa" loading="lazy" width="380" height="240"
-              onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22380%22 height=%22240%22><rect fill=%22%23FFC10722%22 width=%22380%22 height=%22240%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2270%22>🥟</text></svg>'" />
+            <img src="assets/images/farsan/samosa.png" alt="Crispy Samosa" loading="lazy" decoding="async" width="380" height="240" data-fallback-emoji="🥟" />
           </div>
           <div class="product-body">
             <h3 class="product-name" data-en="Samosa" data-gu="સામોસા">Samosa</h3>
@@ -360,8 +359,7 @@
       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
         <div class="product-card">
           <div class="product-img-wrap">
-            <img src="assets/images/farsan/khaman.png" alt="Soft Khaman" loading="lazy" width="380" height="240"
-              onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22380%22 height=%22240%22><rect fill=%22%23FF993311%22 width=%22380%22 height=%22240%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2270%22>🍰</text></svg>'" />
+            <img src="assets/images/farsan/khaman.png" alt="Soft Khaman" loading="lazy" decoding="async" width="380" height="240" data-fallback-emoji="🍰" />
           </div>
           <div class="product-body">
             <h3 class="product-name" data-en="Khaman" data-gu="ખમણ">Khaman</h3>
@@ -381,8 +379,7 @@
       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
         <div class="product-card">
           <div class="product-img-wrap">
-            <img src="assets/images/farsan/patra.png" alt="Patra" loading="lazy" width="380" height="240"
-              onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22380%22 height=%22240%22><rect fill=%22%235C3A2222%22 width=%22380%22 height=%22240%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2270%22>🌿</text></svg>'" />
+            <img src="assets/images/farsan/patra.png" alt="Patra" loading="lazy" decoding="async" width="380" height="240" data-fallback-emoji="🌿" />
           </div>
           <div class="product-body">
             <h3 class="product-name" data-en="Patra" data-gu="પાત્રા">Patra</h3>
@@ -402,8 +399,7 @@
       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
         <div class="product-card">
           <div class="product-img-wrap">
-            <img src="assets/images/farsan/dhokla.jpg" alt="Steamed Dhokla" loading="lazy" width="380" height="240"
-              onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22380%22 height=%22240%22><rect fill=%22%23FFC10722%22 width=%22380%22 height=%22240%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2270%22>🟡</text></svg>'" />
+            <img src="assets/images/farsan/dhokla.jpg" alt="Steamed Dhokla" loading="lazy" decoding="async" width="380" height="240" data-fallback-emoji="🟡" />
           </div>
           <div class="product-body">
             <h3 class="product-name" data-en="Dhokla" data-gu="ઢોકળા">Dhokla</h3>
@@ -423,8 +419,7 @@
       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
         <div class="product-card">
           <div class="product-img-wrap">
-            <img src="assets/images/farsan/mix-farsan.png" alt="Mix Farsan" loading="lazy" width="380" height="240"
-              onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22380%22 height=%22240%22><rect fill=%22%23FF993311%22 width=%22380%22 height=%22240%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2270%22>🍽️</text></svg>'" />
+            <img src="assets/images/farsan/mix-farsan.png" alt="Mix Farsan" loading="lazy" decoding="async" width="380" height="240" data-fallback-emoji="🍽️" />
           </div>
           <div class="product-body">
             <h3 class="product-name" data-en="Mix Farsan" data-gu="મિક્સ ફરસાણ">Mix Farsan</h3>
@@ -492,8 +487,7 @@
 
       <!-- Khandavi (large) -->
       <div class="gallery-item gallery-item-large" data-aos="fade-up" data-aos-delay="0" role="listitem">
-        <img src="assets/images/farsan/khandvi.png" alt="Khandavi" loading="lazy"
-          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23FF993311%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2280%22>🥗</text></svg>'" />
+        <img src="assets/images/farsan/khandvi.png" alt="Khandavi" loading="lazy" decoding="async" width="800" height="450" data-fallback-emoji="🥗" />
         <div class="gallery-overlay">
           <span class="gallery-caption" data-en="Khandavi" data-gu="ખાંડવી">Khandavi</span>
         </div>
@@ -501,8 +495,7 @@
 
       <!-- Samosa -->
       <div class="gallery-item" data-aos="fade-up" data-aos-delay="100" role="listitem">
-        <img src="assets/images/farsan/samosa.png" alt="Samosa" loading="lazy"
-          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23FF993311%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2280%22>🥟</text></svg>'" />
+        <img src="assets/images/farsan/samosa.png" alt="Samosa" loading="lazy" decoding="async" width="400" height="400" data-fallback-emoji="🥟" />
         <div class="gallery-overlay">
           <span class="gallery-caption" data-en="Samosa" data-gu="સામોસા">Samosa</span>
         </div>
@@ -510,8 +503,7 @@
 
       <!-- Khaman -->
       <div class="gallery-item" data-aos="fade-up" data-aos-delay="200" role="listitem">
-        <img src="assets/images/farsan/khaman.png" alt="Khaman" loading="lazy"
-          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23FF993311%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2280%22>🍰</text></svg>'" />
+        <img src="assets/images/farsan/khaman.png" alt="Khaman" loading="lazy" decoding="async" width="400" height="400" data-fallback-emoji="🍰" />
         <div class="gallery-overlay">
           <span class="gallery-caption" data-en="Khaman" data-gu="ખમણ">Khaman</span>
         </div>
@@ -519,8 +511,7 @@
 
       <!-- Dhokla -->
       <div class="gallery-item" data-aos="fade-up" data-aos-delay="0" role="listitem">
-        <img src="assets/images/farsan/dhokla.jpg" alt="Dhokla" loading="lazy"
-          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23FF993311%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2280%22>🟡</text></svg>'" />
+        <img src="assets/images/farsan/dhokla.jpg" alt="Dhokla" loading="lazy" decoding="async" width="400" height="400" data-fallback-emoji="🟡" />
         <div class="gallery-overlay">
           <span class="gallery-caption" data-en="Dhokla" data-gu="ઢોકળા">Dhokla</span>
         </div>
@@ -528,8 +519,7 @@
 
       <!-- Patra -->
       <div class="gallery-item" data-aos="fade-up" data-aos-delay="100" role="listitem">
-        <img src="assets/images/farsan/patra.png" alt="Patra" loading="lazy"
-          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23FF993311%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2280%22>🌿</text></svg>'" />
+        <img src="assets/images/farsan/patra.png" alt="Patra" loading="lazy" decoding="async" width="400" height="400" data-fallback-emoji="🌿" />
         <div class="gallery-overlay">
           <span class="gallery-caption" data-en="Patra" data-gu="પાત્રા">Patra</span>
         </div>
@@ -537,8 +527,7 @@
 
       <!-- Our Shop (large) -->
       <div class="gallery-item gallery-item-large" data-aos="fade-up" data-aos-delay="200" role="listitem">
-        <img src="assets/images/shop.webp" alt="Our Shop" loading="lazy"
-          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23FF993311%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2280%22>🏪</text></svg>'" />
+        <img src="assets/images/shop.webp" alt="Our Shop" loading="lazy" decoding="async" width="800" height="450" data-fallback-emoji="🏪" />
         <div class="gallery-overlay">
           <span class="gallery-caption" data-en="Our Shop" data-gu="અમારી દુકાન">Our Shop</span>
         </div>
