@@ -34,21 +34,47 @@
   .col-lg-5 .about-image-grid { overflow: hidden; padding-bottom: 1.5rem; }
   .about-img-badge  { right: -.5rem; bottom: -.5rem; }
 
-  /* ── Mobile navbar dropdown ── */
-  #navMenu {
-    background: var(--brown);
-    border-radius: var(--radius-md);
-    margin-top: .6rem;
-    padding: .75rem .5rem;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255,255,255,.1);
+  /* Remove backdrop-filter on mobile to prevent navbar from trapping the offcanvas fixed positioning */
+  #mainNav {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* ── Mobile Fullscreen Offcanvas Menu ── */
+  #navMenu.offcanvas-lg {
+    background: linear-gradient(135deg, var(--brown) 0%, #3d2010 100%);
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border: none;
+    border-radius: 0;
+    margin-top: 0;
+    padding: 0;
+    box-shadow: none;
+    z-index: 1060 !important;
+  }
+
+  #navMenu .offcanvas-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1.5rem;
+  }
+
+  #navMenu .navbar-nav {
+    width: 100%;
+    text-align: center;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
   }
 
   #navMenu .nav-link {
     color: rgba(255,255,255,.85) !important;
-    padding: .65rem 1rem !important;
+    padding: .5rem 1.5rem !important;
     border-radius: var(--radius-sm);
-    margin-bottom: .2rem;
+    margin-bottom: 0;
+    font-size: 1.35rem;
+    font-weight: 600;
   }
 
   /* Remove underline animation inside mobile menu */
@@ -57,16 +83,28 @@
   #navMenu .nav-link:hover,
   #navMenu .nav-link.active {
     color: var(--yellow) !important;
-    background: rgba(255,255,255,.1);
+    background: rgba(255,255,255,.08);
+    transform: scale(1.05);
+  }
+
+  /* Buttons container inside mobile menu */
+  #navMenu .nav-item.ms-lg-2 {
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem !important;
+    margin-top: 1.5rem;
   }
 
   /* Language toggle inside mobile menu */
   #navMenu .btn-lang {
-    background: rgba(255,153,51,.2);
+    background: rgba(255,153,51,.15);
     border-color: var(--saffron);
     color: var(--saffron);
-    width: 100%;
+    flex: 1;
     justify-content: center;
+    padding: .8rem .4rem;
+    font-size: 1rem;
+    white-space: nowrap;
   }
   #navMenu .btn-lang:hover { background: var(--saffron); color: #fff; }
 
@@ -74,14 +112,17 @@
   #navMenu .btn-admin {
     background: var(--saffron);
     color: #fff;
-    width: 100%;
+    flex: 1;
     justify-content: center;
+    padding: .8rem .4rem;
+    font-size: 1rem;
+    white-space: nowrap;
   }
   #navMenu .btn-admin:hover { background: var(--saffron-dark); color: #fff; }
 
   /* Remove Bootstrap lg-specific margins inside mobile menu */
   #navMenu .ms-lg-2,
-  #navMenu .ms-lg-1 { margin-left: 0 !important; margin-top: .4rem; }
+  #navMenu .ms-lg-1 { margin-left: 0 !important; }
 
   /* Hamburger toggler */
   .navbar-toggler       { padding: .35rem .5rem; }

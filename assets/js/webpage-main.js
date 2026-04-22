@@ -116,13 +116,36 @@
 
   /* ── Smooth close mobile nav on link click ────────────────── */
   function initMobileNav() {
-    var bsCollapse = qs('#navMenu');
-    if (!bsCollapse) return;
+    var bsMenu = qs('#navMenu');
+    if (!bsMenu) return;
 
-    qsa('.nav-link', bsCollapse).forEach(function (link) {
-      link.addEventListener('click', function () {
-        var collapse = bootstrap.Collapse.getInstance(bsCollapse);
-        if (collapse) collapse.hide();
+    qsa('.nav-link', bsMenu).forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var href = this.getAttribute('href');
+        if (!href || !href.startsWith('#')) return;
+        
+        var targetSection = qs(href);
+        if (!targetSection) return;
+
+        e.preventDefault();
+        
+        var scrollPos = targetSection.offsetTop - (qs('#mainNav') ? qs('#mainNav').offsetHeight : 72);
+
+        if (typeof bootstrap !== 'undefined' && bootstrap.Offcanvas && bsMenu.classList.contains('show')) {
+          var offcanvas = bootstrap.Offcanvas.getInstance(bsMenu);
+          if (offcanvas) {
+            var onHidden = function () {
+              bsMenu.removeEventListener('hidden.bs.offcanvas', onHidden);
+              window.scrollTo({ top: scrollPos, behavior: 'smooth' });
+            };
+            bsMenu.addEventListener('hidden.bs.offcanvas', onHidden);
+            offcanvas.hide();
+            return;
+          }
+        }
+        
+        // Desktop or not offcanvas
+        window.scrollTo({ top: scrollPos, behavior: 'smooth' });
       });
     });
   }
@@ -331,18 +354,7 @@
     });
   }
 
-  /* ── Navbar collapse close on outside click (mobile) ──────── */
-  function initOutsideClick() {
-    document.addEventListener('click', function (e) {
-      var nav = qs('#mainNav');
-      var menu = qs('#navMenu');
-      if (!nav || !menu) return;
-      if (!nav.contains(e.target) && menu.classList.contains('show')) {
-        var collapse = bootstrap.Collapse.getInstance(menu);
-        if (collapse) collapse.hide();
-      }
-    });
-  }
+  /* ── (Removed initOutsideClick as offcanvas natively handles backdrop clicks) ──────── */
 
   /* ── Init all ─────────────────────────────────────────────── */
   function init() {
@@ -356,7 +368,6 @@
     initContactForm();
     initCounters();
     initProductRipple();
-    initOutsideClick();
   }
 
   if (document.readyState === 'loading') {

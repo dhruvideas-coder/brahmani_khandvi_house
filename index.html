@@ -109,7 +109,7 @@
 <body>
 
   <!-- ===================== NAVBAR ===================== -->
-  <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="mainNav" aria-label="Main navigation">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" aria-label="Main navigation">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="#home">
         <div class="logo-icon" aria-hidden="true">
@@ -123,36 +123,45 @@
         </div>
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#navMenu"
         aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
-          <li class="nav-item"><a class="nav-link" href="#home" data-en="Home" data-gu="હોમ">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about" data-en="About Us" data-gu="અમારા વિશે">About Us</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#products" data-en="Products" data-gu="ઉત્પાદનો">Products</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#wholesale" data-en="Wholesale"
-              data-gu="જથ્થાબંધ">Wholesale</a></li>
-          <li class="nav-item"><a class="nav-link" href="#gallery" data-en="Gallery" data-gu="ગેલેરી">Gallery</a></li>
-          <li class="nav-item"><a class="nav-link" href="#testimonials" data-en="Reviews" data-gu="સમીક્ષાઓ">Reviews</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#contact" data-en="Contact" data-gu="સંપર્ક">Contact</a></li>
-          <li class="nav-item ms-lg-2 d-flex gap-2 align-items-center">
-            <button class="btn btn-lang d-flex align-items-center" id="langToggle" aria-label="Switch language">
-              <i class="bi bi-translate me-1"></i>
-              <span id="langLabel">ગુજરાતી</span>
-            </button>
-            <a href="#" class="btn btn-admin d-flex align-items-center" aria-label="Admin Login">
-              <i class="bi bi-shield-lock me-1"></i>Admin
-            </a>
-          </li>
-        </ul>
+      <div class="offcanvas-lg offcanvas-top custom-mobile-menu" tabindex="-1" id="navMenu"
+        aria-labelledby="navMenuLabel">
+        <div class="offcanvas-header d-lg-none border-bottom border-light border-opacity-10 py-3">
+          <div class="brand-name text-white fs-5" id="navMenuLabel" data-en="Bhramani Khandavi"
+            data-gu="બ્રાહ્માણી ખાંડવી">Bhramani Khandavi</div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" data-bs-target="#navMenu"
+            aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+            <li class="nav-item"><a class="nav-link" href="#home" data-en="Home" data-gu="હોમ">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about" data-en="About Us" data-gu="અમારા વિશે">About Us</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#products" data-en="Products" data-gu="ઉત્પાદનો">Products</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#wholesale" data-en="Wholesale"
+                data-gu="જથ્થાબંધ">Wholesale</a></li>
+            <li class="nav-item"><a class="nav-link" href="#gallery" data-en="Gallery" data-gu="ગેલેરી">Gallery</a></li>
+            <li class="nav-item"><a cla ss="nav-link" href="#testimonials" data-en="Reviews"
+                data-gu="સમીક્ષાઓ">Reviews</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact" data-en="Contact" data-gu="સંપર્ક">Contact</a></li>
+            <li class="nav-item ms-lg-2 d-flex gap-2 align-items-center">
+              <button class="btn btn-lang d-flex align-items-center" id="langToggle" aria-label="Switch language">
+                <i class="bi bi-translate me-1"></i>
+                <span id="langLabel">ગુજરાતી</span>
+              </button>
+              <a href="https://orange-wolf-434391.hostingersite.com/admin"
+                class="btn btn-admin d-flex align-items-center" aria-label="Admin Login">
+                <i class="bi bi-shield-lock me-1"></i>Admin
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
   </nav>
 
   <!-- ===================== HERO ===================== -->
